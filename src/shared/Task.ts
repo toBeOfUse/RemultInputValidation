@@ -1,18 +1,21 @@
-import { Allow, Entity, Fields, Validators } from "remult";
+import { Entity, Fields } from "remult";
 
 @Entity("tasks", {
-    allowApiCrud: true
+  allowApiCrud: true,
 })
 export class Task {
-    @Fields.autoIncrement()
-    id = 0;
-    @Fields.string<Task>({
-        validate: task => {
-            if (task.title.length < 3)
-                throw "Too Short";
-        }
-    })
-    title = '';
-    @Fields.boolean()
-    completed = false;
+  @Fields.autoIncrement()
+  id = 0;
+
+  @Fields.string<Task>({
+    validate: (task) => {
+      if (task.title.length < 3) {
+        throw "Too Short";
+      }
+    },
+  })
+  title = "";
+
+  @Fields.boolean()
+  completed = false;
 }
