@@ -1,8 +1,8 @@
 import "todomvc-app-css/index.css";
 import "todomvc-common/base.css";
+import { ErrorInfo, Remult } from "remult";
 import { useEffect, useState } from "react";
 import { Task } from "../shared/Task";
-import { ErrorInfo, Remult } from "remult";
 import { TasksController } from "../shared/TasksController";
 
 const remult = new Remult();
@@ -11,9 +11,9 @@ const taskRepo = remult.repo(Task);
 
 function fetchTasks(filter: string) {
   return taskRepo.find({
-    where: filter != "all"
+    where: filter !== "all"
       ? {
-        completed: filter == "completed",
+        completed: filter === "completed",
       }
       : undefined,
   });
@@ -78,7 +78,7 @@ function App() {
             <label htmlFor="toggle-all">Mark all as complete</label>
             <ul className="todo-list">
               {tasks.map((task) => {
-                if (!editingTask || task.id != editingTask.id) {
+                if (!editingTask || task.id !== editingTask.id) {
                   const setCompleted = async (completed: boolean) => {
                     const updatedTask = await taskRepo.save({
                       ...task,
@@ -174,7 +174,7 @@ function App() {
         <p>Double-click to edit a todo</p>
         <p>
           Created with{" "}
-          <a href="https://remult.dev" target="_blank">
+          <a href="https://remult.dev" target="_blank" rel="noreferrer">
             Remult
           </a>
         </p>

@@ -5,6 +5,7 @@ import { TasksController } from "../shared/TasksController";
 
 const app = express();
 
+// uses default backend JSON db (notice `db` folder created when adding the first task)
 app.use(remultExpress({
     entities: [Task],
     controllers: [TasksController]
