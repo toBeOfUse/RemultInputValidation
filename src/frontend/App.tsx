@@ -66,82 +66,80 @@ function App() {
           />
         </header>
 
-        {tasks.length > 0 && (
-          <section className="main">
-            <input
-              id="toggle-all"
-              className="toggle-all"
-              type="checkbox"
-              checked={tasks.length > 0 && tasks[0].completed}
-              onChange={(e) => setAll(e.target.checked)}
-            />
-            <label htmlFor="toggle-all">Mark all as complete</label>
-            <ul className="todo-list">
-              {tasks.map((task) => {
-                if (!editingTask || task.id !== editingTask.id) {
-                  const setCompleted = async (completed: boolean) => {
-                    const updatedTask = await taskRepo.save({
-                      ...task,
-                      completed,
-                    });
-                    setTasks(tasks.map((t) => t === task ? updatedTask : t));
-                  };
+        <section className="main">
+          <input
+            id="toggle-all"
+            className="toggle-all"
+            type="checkbox"
+            checked={tasks.length > 0 && tasks[0].completed}
+            onChange={(e) => setAll(e.target.checked)}
+          />
+          <label htmlFor="toggle-all">Mark all as complete</label>
+          <ul className="todo-list">
+            {tasks.map((task) => {
+              if (!editingTask || task.id !== editingTask.id) {
+                const setCompleted = async (completed: boolean) => {
+                  const updatedTask = await taskRepo.save({
+                    ...task,
+                    completed,
+                  });
+                  setTasks(tasks.map((t) => t === task ? updatedTask : t));
+                };
 
-                  const deleteTask = async () => {
-                    await taskRepo.delete(task);
-                    setTasks(tasks.filter((t) => t !== task));
-                  };
+                const deleteTask = async () => {
+                  await taskRepo.delete(task);
+                  setTasks(tasks.filter((t) => t !== task));
+                };
 
-                  return (
-                    <li
-                      key={task.id}
-                      className={task.completed ? "completed" : ""}
-                    >
-                      <div className="view">
-                        <input
-                          className="toggle"
-                          type="checkbox"
-                          checked={task.completed}
-                          onChange={(e) => setCompleted(e.target.checked)}
-                        />
-                        <label onDoubleClick={() => setEditingTask(task)}>
-                          {task.title}
-                        </label>
-                        <button className="destroy" onClick={deleteTask}>
-                        </button>
-                      </div>
-                    </li>
-                  );
-                } else {
-                  const saveTask = async () => {
-                    try {
-                      const savedTask = await taskRepo.save(editingTask);
-                      setTasks(tasks.map((t) => t === task ? savedTask : t));
-                      setEditingTask(undefined);
-                    } catch (error: any) {
-                      alert((error as ErrorInfo)?.message);
-                    }
-                  };
-
-                  const titleChange = (title: string) => {
-                    setEditingTask({ ...editingTask, title });
-                  };
-
-                  return (
-                    <li key={task.id} className="editing">
+                return (
+                  <li
+                    key={task.id}
+                    className={task.completed ? "completed" : ""}
+                  >
+                    <div className="view">
                       <input
-                        className="edit"
-                        value={editingTask.title}
-                        onBlur={saveTask}
-                        onChange={(e) => titleChange(e.target.value)}
+                        className="toggle"
+                        type="checkbox"
+                        checked={task.completed}
+                        onChange={(e) => setCompleted(e.target.checked)}
                       />
-                    </li>
-                  );
-                }
-              })}
-            </ul>
-          </section>
-        )}
+                      <label onDoubleClick={() => setEditingTask(task)}>
+                        {task.title}
+                      </label>
+                      <button className="destroy" onClick={deleteTask}>
+                      </button>
+                    </div>
+                  </li>
+                );
+              } else {
+                const saveTask = async () => {
+                  try {
+                    const savedTask = await taskRepo.save(editingTask);
+                    setTasks(tasks.map((t) => t === task ? savedTask : t));
+                    setEditingTask(undefined);
+                  } catch (error: any) {
+                    alert((error as ErrorInfo)?.message);
+                  }
+                };
+
+                const titleChange = (title: string) => {
+                  setEditingTask({ ...editingTask, title });
+                };
+
+                return (
+                  <li key={task.id} className="editing">
+                    <input
+                      className="edit"
+                      value={editingTask.title}
+                      onBlur={saveTask}
+                      onChange={(e) => titleChange(e.target.value)}
+                    />
+                  </li>
+                );
+              }
+            })}
+          </ul>
+        </section>
 
         <footer className="footer">
           <span className="todo-count">
