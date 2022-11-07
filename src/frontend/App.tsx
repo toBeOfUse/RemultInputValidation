@@ -1,11 +1,9 @@
 import "todomvc-app-css/index.css";
 import "todomvc-common/base.css";
-import { ErrorInfo, Remult } from "remult";
+import { ErrorInfo, remult } from "remult";
 import { useEffect, useState } from "react";
 import { Task } from "../shared/Task";
 import { TasksController } from "../shared/TasksController";
-
-const remult = new Remult();
 
 const taskRepo = remult.repo(Task);
 

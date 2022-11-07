@@ -11,4 +11,13 @@ app.use(remultExpress({
     controllers: [TasksController]
 }));
 
-app.listen(process.env["PORT"] || 3002, () => console.log("Server started"));
+
+import('vite').then(async ({ createServer }) => {
+    const viteDevServer = await createServer({
+        server: {
+            middlewareMode: true
+        }
+    });
+    app.use(viteDevServer.middlewares)
+    app.listen(3002, () => console.log("Server started"));
+})
