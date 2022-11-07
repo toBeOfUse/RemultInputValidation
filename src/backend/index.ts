@@ -19,5 +19,5 @@ import('vite').then(async ({ createServer }) => {
         }
     });
     app.use(viteDevServer.middlewares)
-    app.listen(process.env['PORT'] || 3002, () => console.log("Server started"));
+    app.listen(3000, () => console.log("Server started"));
 })
