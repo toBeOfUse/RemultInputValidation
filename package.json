@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "scripts": {
-    "vite": "vite",
+    "dev": "vite",
     "build": "tsc && vite build && tsc -p tsconfig.server.json",
     "start": "node dist/backend/",
     "preview": "vite preview"
