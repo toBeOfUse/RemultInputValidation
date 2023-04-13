@@ -20,5 +20,5 @@ export class Task {
   completed = false
 
   @Fields.string()
-  test = ''
+  shouldBeString = ''
 }
