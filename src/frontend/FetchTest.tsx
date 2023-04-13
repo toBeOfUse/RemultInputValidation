@@ -25,7 +25,7 @@ export default function App() {
       const res = await fetch('/api/tasks', {
         headers: { 'Content-Type': 'application/json' },
         method: 'POST',
-        body: toPost
+        body: JSON.parse(JSON.stringify(toPost)) // ensure valid json
       })
       if (!res.ok) {
         throw JSON.stringify(await res.json())
