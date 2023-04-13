@@ -18,4 +18,7 @@ export class Task {
 
   @Fields.boolean()
   completed = false
+
+  @Fields.string()
+  test = ''
 }
