@@ -31,6 +31,7 @@ export class Task {
   @Fields.boolean()
   completed = false
 
+  // used @checkedString() for type validation
   @Fields.string()
   shouldBeString = ''
 }

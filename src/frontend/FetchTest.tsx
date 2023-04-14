@@ -39,14 +39,14 @@ export default function App() {
 
   return (
     <>
-      <h3>Enter JSON to test adding to the database:</h3>
+      <h3>Enter a Task in JSON form:</h3>
       <textarea
         style={{ display: 'block', width: 500, minHeight: 200 }}
         value={toPost}
         onChange={(e) => setToPost(e.target.value)}
       />
       <button onClick={postToDB}>
-        Post to <pre style={{ display: 'inline' }}>/api/tasks</pre>
+        Post task to <pre style={{ display: 'inline' }}>/api/tasks</pre>
       </button>
       {currentError && (
         <>
