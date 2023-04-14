@@ -1,4 +1,4 @@
-import { Entity, FieldOptions, Fields } from 'remult'
+import { Entity, FieldOptions, Fields, Validators } from 'remult'
 
 function checkedString(options?: FieldOptions) {
   return Fields.string({
@@ -31,7 +31,6 @@ export class Task {
   @Fields.boolean()
   completed = false
 
-  // used @checkedString() for type validation
-  @Fields.string()
-  shouldBeString = ''
+  @Fields.number({ allowNull: false })
+  shouldBeNum: number = 5
 }
