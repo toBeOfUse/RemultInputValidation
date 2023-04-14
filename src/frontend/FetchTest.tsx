@@ -1,4 +1,6 @@
 import { useState, useEffect } from 'react'
+import { remult } from 'remult'
+import { Task } from '../shared/Task'
 
 export default function App() {
   const [toPost, setToPost] = useState(
@@ -11,9 +13,7 @@ export default function App() {
 
   const [currentDB, setCurrentDB] = useState('')
   const getCurrentDB = async () => {
-    setCurrentDB(
-      JSON.stringify(await (await fetch('/api/tasks')).json(), null, 4)
-    )
+    setCurrentDB(JSON.stringify(await remult.repo(Task).find(), null, 4))
   }
   useEffect(() => {
     getCurrentDB()
