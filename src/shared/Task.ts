@@ -22,8 +22,8 @@ function checkedString(options?: FieldOptions) {
 
 @Entity('tasks', { allowApiCrud: true })
 export class Task {
-  @Fields.autoIncrement()
-  id = 0
+  @Fields.cuid()
+  id: string = ''
 
   @Fields.string()
   title = ''

@@ -5,7 +5,7 @@ import { Task } from '../shared/Task'
 export default function App() {
   const [toPost, setToPost] = useState(
     JSON.stringify(
-      { title: 'test insert', completed: false, shouldBeString: 89 },
+      { title: 'test insert', completed: false, shouldBeNum: 89 },
       null,
       4
     )
@@ -22,6 +22,7 @@ export default function App() {
   const [currentError, setCurrentError] = useState('')
   const postToDB = async () => {
     try {
+      console.log('fetch start', Date.now())
       const res = await fetch('/api/tasks', {
         headers: { 'Content-Type': 'application/json' },
         method: 'POST',
